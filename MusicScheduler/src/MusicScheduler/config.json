@@ -1,0 +1,10 @@
+{
+  "AppSettings": {
+    "SiteTitle": "MusicScheduler"
+  },
+  "Data": {
+    "DefaultConnection": {
+      "ConnectionString": "Server=(localdb)\\mssqllocaldb;Database=aspnet5-MusicScheduler-d58ebff9-59c4-40ee-a339-2ecbb714949e;Trusted_Connection=True;MultipleActiveResultSets=true"
+    }
+  }
+}
