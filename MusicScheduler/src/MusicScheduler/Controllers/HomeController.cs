@@ -11,6 +11,12 @@ namespace MusicScheduler.Controllers
 {
     public class HomeController : Controller
     {
+        private enum ActionType
+        {
+            SkipSong = 1,
+            ToggleMusic
+        }
+
         private readonly UserManager userManager;
 
         public HomeController()
@@ -69,8 +75,17 @@ namespace MusicScheduler.Controllers
             ServiceLocator.Musicplayer.PauseResumeCurrentSong();
         }
 
-        public IActionResult Info()
+        public IActionResult Info(int actionType)
         {
+            if ((ActionType)actionType == ActionType.SkipSong)
+            {
+                this.Skip();
+            }
+            else if ((ActionType)actionType == ActionType.ToggleMusic)
+            {
+                this.PauseResume();
+            }
+
             ViewData["Title"] = "Info";
             ViewData["Paused"] = ServiceLocator.Musicplayer.IsPaused;
             ViewData["CurrentPlayingSong"] = ServiceLocator.Musicplayer.CurrentPlayingSong != null ? ServiceLocator.Musicplayer.CurrentPlayingSong.Name : "";

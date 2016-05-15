@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using System.Threading.Tasks
+@using MusicScheduler.Controllers
+<!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8" />
@@ -32,8 +34,8 @@
                 <ul class="nav navbar-nav">
                     <li><a asp-controller="Home" asp-action="Index">Book</a></li>
                     <li><a asp-controller="Home" asp-action="Info">Info</a></li>
-                    <li><a asp-controller="Home" asp-action="Skip">Skip</a></li>
-                    <li><a asp-controller="Home" asp-action="PauseResume">Pause/Resume</a></li>
+                    <li>@Html.ActionLink("Skip", "Info", "Home", new { actionType = 1 }, null)</li>
+                    <li>@Html.ActionLink("Pause/Resume", "Info", "Home", new { actionType = 2 }, null)</li>
                 </ul>
             </div>
         </div>
