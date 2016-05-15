@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNet.Http.Extensions;
 using Microsoft.AspNet.Mvc;
 using MusicScheduler.Objects;
 using YoutubeExtractor;
@@ -60,6 +61,7 @@ namespace MusicScheduler.Controllers
         public void Skip()
         {
             ServiceLocator.Musicplayer.SkipCurrentSong();
+//            Response.Redirect(Request.GetDisplayUrl());
         }
 
         public void PauseResume()

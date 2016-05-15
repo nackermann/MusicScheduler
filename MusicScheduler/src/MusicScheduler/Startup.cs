@@ -68,7 +68,7 @@ namespace MusicScheduler
 
             app.UseStaticFiles();
 
-            app.UseIdentity();
+//            app.UseIdentity();
 
             // To configure external authentication please see http://go.microsoft.com/fwlink/?LinkID=532715
 
