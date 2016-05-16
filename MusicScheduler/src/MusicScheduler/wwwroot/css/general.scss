@@ -5,6 +5,7 @@ body {
 
     .navbar-inverse {
         background-color: $primary-color;
+        background: linear-gradient(#37537F, $primary-color);
     }
 
     .navbar-inverse .navbar-brand {

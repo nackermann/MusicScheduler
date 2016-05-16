@@ -1,5 +1,6 @@
 body .navbar-inverse {
-  background-color: #344f79; }
+  background-color: #344f79;
+  background: linear-gradient(#37537F, #344f79); }
 
 body .navbar-inverse .navbar-brand {
   color: white; }
