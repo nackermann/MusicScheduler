@@ -101,7 +101,7 @@ namespace MusicScheduler.Controllers
                 {
                     YoutubeFile youtubefile = this.userManager.Users[i].YoutubeLinks.ElementAt(j);
 
-                    string additionalInfo = " downloading...";
+                    string additionalInfo = "- Downloading";
                     if (youtubefile.Downloaded == true)
                     {
                         additionalInfo = " Title: " + youtubefile.Name + " Duration: " + youtubefile.Duration + " seconds";

@@ -1,0 +1,36 @@
+﻿$primary-color: #344f79;
+$primary-color-highlight: #46A3F4;
+
+body {
+
+    .navbar-inverse {
+        background-color: $primary-color;
+    }
+
+    .navbar-inverse .navbar-brand {
+        color: white;
+    }
+
+    .navbar-inverse .navbar-nav > li > a {
+        color: white;
+    }
+
+    .navbar-inverse .navbar-nav > li > a:hover {
+        color: $primary-color-highlight;
+    }
+
+    .input-group {
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    .currentlyPlaying {
+        margin-top: 20px;
+        padding: 5px;
+        margin-bottom: 20px;
+    }
+
+    .currentlyPlayingHeader {
+        font-weight: bold;
+    }
+}

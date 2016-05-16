@@ -1,16 +1,21 @@
-﻿@if (ViewData["CurrentPlayingSong"] != "")
-{
-    <h1>Currently playing: @ViewData["CurrentPlayingSong"]</h1>
-}
+﻿    <p class="bg-info currentlyPlaying">
+        <span class="currentlyPlayingHeader">Currently playing</span><br />@ViewData["CurrentPlayingSong"]
+    </p>
 
-@for (var i = 0; i < (int)ViewData["Users"]; i++)
-{
-    <h2>@ViewData["User" + i]</h2>
-    <p>Time played: @ViewData["User" + i + "TimePlayed"] seconds</p>
-    <h3>Links in queue:</h3>
-    @for (var j = 0; j < (int)ViewData["User" + i + "YoutubeLinks"]; j++)
+<h3>Users</h3>
+<table class="table">
+    @for (var i = 0; i < (int)ViewData["Users"]; i++)
     {
-        <p>@ViewData["User" + i + "YoutubeLink" + j]</p>
+        <tr>
+            <th>@ViewData["User" + i]</th>
+            <td>Time played: @ViewData["User" + i + "TimePlayed"] seconds</td>
+        </tr>
+        @for (var j = 0; j < (int)ViewData["User" + i + "YoutubeLinks"]; j++)
+        {
+            <tr>
+                <td></td>
+                <td>@ViewData["User" + i + "YoutubeLink" + j]</td>
+            </tr>
+        }
     }
-    <p>--------------------------------------------------------------------------------------------------------------------------------------------------------</p>
-}
+</table>
