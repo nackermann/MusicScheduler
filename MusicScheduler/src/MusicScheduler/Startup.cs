@@ -15,11 +15,12 @@ namespace MusicScheduler
         {
             try
             {
-                Directory.Delete(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "/Downloaded"), true);
+                Directory.Delete(
+                    Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "/Downloaded"), true);
             }
             catch (Exception)
             {
-                // directory wurde nicht gefunden, weil erster start, ist wurst, geht auch bestimmt ohne try catch, aber zu faul :)
+                // Directory hasn't been found since this is our first start. In that case, the exception does not matter.
             }
 
             ServiceLocator.Initalize();
@@ -27,7 +28,7 @@ namespace MusicScheduler
             // Set up configuration sources.
             var builder = new ConfigurationBuilder()
                 .AddJsonFile("appsettings.json")
-                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true);
+                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", true);
 
             if (env.IsDevelopment())
             {
@@ -68,15 +69,13 @@ namespace MusicScheduler
 
             app.UseStaticFiles();
 
-//            app.UseIdentity();
 
             // To configure external authentication please see http://go.microsoft.com/fwlink/?LinkID=532715
-
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    "default",
+                    "{controller=Home}/{action=Index}/{id?}");
             });
         }
 

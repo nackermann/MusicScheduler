@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNet.Http.Extensions;
 using Microsoft.AspNet.Mvc;
 using MusicScheduler.Objects;
 using YoutubeExtractor;
@@ -11,17 +8,10 @@ namespace MusicScheduler.Controllers
 {
     public class HomeController : Controller
     {
-        private enum ActionType
-        {
-            SkipSong = 1,
-            ToggleMusic
-        }
-
         private readonly UserManager userManager;
 
         public HomeController()
         {
-            // neu
             this.userManager = ServiceLocator.Usermanager;
         }
 
@@ -32,12 +22,12 @@ namespace MusicScheduler.Controllers
 
             try
             {
-                string youtubeLink = Request.Form.ElementAt(0).Value.ElementAt(0);
-                string userName = Request.Form.ElementAt(1).Value.ElementAt(0).ToLower();
+                var youtubeLink = Request.Form.ElementAt(0).Value.ElementAt(0);
+                var userName = Request.Form.ElementAt(1).Value.ElementAt(0).ToLower();
 
-                string videoUrl = youtubeLink;
+                var videoUrl = youtubeLink;
 
-                bool isYoutubeUrl = DownloadUrlResolver.TryNormalizeYoutubeUrl(videoUrl, out videoUrl);
+                var isYoutubeUrl = DownloadUrlResolver.TryNormalizeYoutubeUrl(videoUrl, out videoUrl);
 
                 if (string.IsNullOrWhiteSpace(youtubeLink) || string.IsNullOrWhiteSpace(userName) || !isYoutubeUrl)
                 {
@@ -45,17 +35,16 @@ namespace MusicScheduler.Controllers
                     return View();
                 }
 
-                User user = this.userManager.Users.Where(x => x.Name == userName).FirstOrDefault();
+                var user = this.userManager.Users.FirstOrDefault(x => x.Name == userName);
 
                 if (user != null)
                 {
-                    user.YoutubeLinks.Add(new YoutubeFile { Url = youtubeLink });
+                    user.YoutubeLinks.Add(new YoutubeFile {Url = youtubeLink});
                 }
                 else
                 {
-                    this.userManager.Users.Add(new User(userName, new YoutubeFile { Url = youtubeLink }));
+                    this.userManager.Users.Add(new User(userName, new YoutubeFile {Url = youtubeLink}));
                 }
-
             }
             catch (Exception)
             {
@@ -67,7 +56,6 @@ namespace MusicScheduler.Controllers
         public void Skip()
         {
             ServiceLocator.Musicplayer.SkipCurrentSong();
-//            Response.Redirect(Request.GetDisplayUrl());
         }
 
         public void PauseResume()
@@ -77,34 +65,37 @@ namespace MusicScheduler.Controllers
 
         public IActionResult Info(int actionType)
         {
-            if ((ActionType)actionType == ActionType.SkipSong)
+            if ((ActionType) actionType == ActionType.SkipSong)
             {
                 this.Skip();
             }
-            else if ((ActionType)actionType == ActionType.ToggleMusic)
+            else if ((ActionType) actionType == ActionType.ToggleMusic)
             {
                 this.PauseResume();
             }
 
             ViewData["Title"] = "Info";
             ViewData["Paused"] = ServiceLocator.Musicplayer.IsPaused;
-            ViewData["CurrentPlayingSong"] = ServiceLocator.Musicplayer.CurrentPlayingSong != null ? ServiceLocator.Musicplayer.CurrentPlayingSong.Name : "";
+            ViewData["CurrentPlayingSong"] = ServiceLocator.Musicplayer.CurrentPlayingSong != null
+                ? ServiceLocator.Musicplayer.CurrentPlayingSong.Name
+                : "";
 
             ViewData["Users"] = this.userManager.Users.Count;
 
-            for (int i = 0; i < this.userManager.Users.Count; i++)
+            for (var i = 0; i < this.userManager.Users.Count; i++)
             {
                 ViewData["User" + i] = this.userManager.Users[i].Name;
                 ViewData["User" + i + "TimePlayed"] = this.userManager.Users[i].TimePlayed;
                 ViewData["User" + i + "YoutubeLinks"] = this.userManager.Users[i].YoutubeLinks.Count;
-                for (int j = 0; j < this.userManager.Users[i].YoutubeLinks.Count; j++)
+                for (var j = 0; j < this.userManager.Users[i].YoutubeLinks.Count; j++)
                 {
-                    YoutubeFile youtubefile = this.userManager.Users[i].YoutubeLinks.ElementAt(j);
+                    var youtubefile = this.userManager.Users[i].YoutubeLinks.ElementAt(j);
 
-                    string additionalInfo = "- Downloading";
-                    if (youtubefile.Downloaded == true)
+                    var additionalInfo = "- Downloading";
+                    if (youtubefile.Downloaded)
                     {
-                        additionalInfo = " Title: " + youtubefile.Name + " Duration: " + youtubefile.Duration + " seconds";
+                        additionalInfo = " Title: " + youtubefile.Name + " Duration: " + youtubefile.Duration +
+                                         " seconds";
                     }
 
                     ViewData["User" + i + "YoutubeLink" + j] = youtubefile.Url + additionalInfo;
@@ -117,6 +108,12 @@ namespace MusicScheduler.Controllers
         public IActionResult Error()
         {
             return View("~/Views/Shared/Error.cshtml");
+        }
+
+        private enum ActionType
+        {
+            SkipSong = 1,
+            ToggleMusic
         }
     }
 }

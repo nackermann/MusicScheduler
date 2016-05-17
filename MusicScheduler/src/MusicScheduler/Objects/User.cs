@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
 
 namespace MusicScheduler.Objects
 {
@@ -21,16 +17,8 @@ namespace MusicScheduler.Objects
 
         public string Name { get; set; }
 
-        private readonly ObservableCollection<YoutubeFile> youtubeLinks = new ObservableCollection<YoutubeFile>();
-
         public double TimePlayed { get; set; }
 
-        public ObservableCollection<YoutubeFile> YoutubeLinks
-        {
-            get
-            {
-                return this.youtubeLinks;
-            }
-        }
+        public ObservableCollection<YoutubeFile> YoutubeLinks { get; } = new ObservableCollection<YoutubeFile>();
     }
 }

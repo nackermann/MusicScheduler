@@ -1,20 +1,18 @@
 ﻿using System;
-using System.Linq;
-using CSCore.SoundOut;
-using CSCore.Codecs;
-using System.Threading.Tasks;
 using System.Diagnostics;
+using System.Linq;
+using System.Threading.Tasks;
+using CSCore.Codecs;
+using CSCore.SoundOut;
 
 namespace MusicScheduler.Objects
 {
     public class MusicPlayer
     {
+        private readonly DownloadManager downloadManager;
         private readonly ISoundOut soundDevice;
         private readonly UserManager userManager;
-        private readonly DownloadManager downloadManager;
         private bool isPlaying;
-        public bool IsPaused { get; set; }
-        public YoutubeFile CurrentPlayingSong { get; set; }
 
         public MusicPlayer()
         {
@@ -34,6 +32,8 @@ namespace MusicScheduler.Objects
             this.soundDevice.Stopped += HandleWaveOutEventPlaybackStopped;
         }
 
+        public bool IsPaused { get; set; }
+        public YoutubeFile CurrentPlayingSong { get; set; }
 
         private void HandleWaveOutEventPlaybackStopped(object sender, PlaybackStoppedEventArgs e)
         {
@@ -51,7 +51,7 @@ namespace MusicScheduler.Objects
 
             User user = null;
             YoutubeFile youtubeFile = null;
-            for (int i = 0; i < this.userManager.Users.Count; i++)
+            for (var i = 0; i < this.userManager.Users.Count; i++)
             {
                 user = this.ChooseNextUser(i);
                 youtubeFile = user.YoutubeLinks.FirstOrDefault();
@@ -66,7 +66,6 @@ namespace MusicScheduler.Objects
             {
                 // there is nothing to play
                 this.isPlaying = false;
-                return;
             }
             else
             {
@@ -74,7 +73,6 @@ namespace MusicScheduler.Objects
 
                 user.TimePlayed += youtubeFile.Duration;
                 this.CurrentPlayingSong = youtubeFile;
-
 
                 Task.Run(() =>
                 {
@@ -93,8 +91,7 @@ namespace MusicScheduler.Objects
         {
             if (WasapiOut.IsSupportedOnCurrentPlatform)
                 return new WasapiOut();
-            else
-                return new DirectSoundOut();
+            return new DirectSoundOut();
         }
 
         private User ChooseNextUser(int userToChoose = 0)
@@ -109,7 +106,7 @@ namespace MusicScheduler.Objects
                 return;
             }
 
-            Task.Run( () => 
+            Task.Run(() =>
             {
                 // Event gets invoked automatically!
                 this.soundDevice.Stop();
@@ -121,23 +118,16 @@ namespace MusicScheduler.Objects
             if (this.IsPaused && !this.isPlaying)
             {
                 // TODO: Resume?
-                Task.Run( () => 
-                {
-                    this.soundDevice.Play();
-                });
+                Task.Run(() => { this.soundDevice.Play(); });
                 this.IsPaused = false;
                 this.isPlaying = true;
             }
             else if (!this.IsPaused && this.isPlaying)
             {
-                Task.Run(() =>
-                {
-                    this.soundDevice.Pause();
-                });
+                Task.Run(() => { this.soundDevice.Pause(); });
                 this.IsPaused = true;
                 this.isPlaying = false;
             }
         }
-
     }
 }

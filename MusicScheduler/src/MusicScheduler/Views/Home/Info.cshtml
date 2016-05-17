@@ -1,21 +1,21 @@
-﻿    <p class="bg-info currentlyPlaying">
-        <span class="currentlyPlayingHeader">Currently playing</span><br />@ViewData["CurrentPlayingSong"]
-    </p>
+﻿<p class="bg-info currentlyPlaying">
+    <span class="currentlyPlayingHeader">Currently playing</span><br/>@ViewData["CurrentPlayingSong"]
+</p>
 
 <h3>Users</h3>
 <table class="table">
-    @for (var i = 0; i < (int)ViewData["Users"]; i++)
+    @for (var i = 0; i < (int) ViewData["Users"]; i++)
     {
         <tr>
             <th>@ViewData["User" + i]</th>
             <td>Time played: @ViewData["User" + i + "TimePlayed"] seconds</td>
         </tr>
-        @for (var j = 0; j < (int)ViewData["User" + i + "YoutubeLinks"]; j++)
-        {
-            <tr>
-                <td></td>
-                <td>@ViewData["User" + i + "YoutubeLink" + j]</td>
-            </tr>
-        }
+        @for (var j = 0; j < (int) ViewData["User" + i + "YoutubeLinks"]; j++)
+         {
+             <tr>
+                 <td></td>
+                 <td>@ViewData["User" + i + "YoutubeLink" + j]</td>
+             </tr>
+         }
     }
 </table>
