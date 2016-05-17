@@ -14,10 +14,19 @@ body {
 
     .navbar-inverse .navbar-nav > li > a {
         color: white;
+        cursor: pointer;
     }
 
     .navbar-inverse .navbar-nav > li > a:hover {
         color: $primary-color-highlight;
+    }
+
+    .userTable th {
+        width: 150px;
+    }
+
+    .userTable {
+        margin-bottom: 50px;
     }
 
     .input-group {
@@ -35,5 +44,13 @@ body {
 
     .currentlyPlayingHeader {
         font-weight: bold;
+    }
+
+    .input-group {
+        width: 500px;
+    }
+
+    .input-group-addon {
+        width: 125px;
     }
 }

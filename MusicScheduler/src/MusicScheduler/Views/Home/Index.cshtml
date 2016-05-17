@@ -1,16 +1,19 @@
-﻿<form asp-controller="Home" asp-action="Index" method="post" class="form-horizontal" role="form">
-    <h2>Book</h2>
-    <div class="input-group">
-        <span class="input-group-addon" id="input-youtube">Youtube URL</span>
-        <input id="youtubeURL" type="text" name="YoutubeLink" class="col-md-8 form-control">
-    </div>
-    <div class="input-group">
-        <span class="input-group-addon" id="input-username">Username</span>
-        <input type="text" name="User" class="col-md-8 form-control">
-    </div>
+﻿@section scripts {
 
-    <div class="input-group">
-        <button type="submit" class="btn btn-primary">Book</button>
-    </div>
-</form>
-<h3>@ViewData["ErrorMessage"]</h3>
+    <!-- Angular polyfill required everywhere -->
+    <script src="https://code.angularjs.org/2.0.0-beta.17/angular2-polyfills.js"></script>
+
+    <script src="https://code.angularjs.org/tools/system.js"></script>
+    <script src="https://code.angularjs.org/tools/typescript.js"></script>
+    <script src="https://code.angularjs.org/2.0.0-beta.17/Rx.js"></script>
+    <script src="https://code.angularjs.org/2.0.0-beta.17/angular2.dev.js"></script>
+    <script src="https://code.angularjs.org/2.0.0-beta.17/router.dev.js"></script>
+    <script src="https://code.angularjs.org/2.0.0-beta.17/http.dev.js"></script>
+
+    <script>
+        System.config({
+            packages: {'app': {defaultExtension: 'js'}}
+        });
+        System.import('./app/bootstrap').catch(console.log.bind(console));
+    </script>
+}

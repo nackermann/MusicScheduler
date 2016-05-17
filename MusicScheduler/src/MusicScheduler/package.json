@@ -1,12 +1,36 @@
 {
-  "name": "ASP.NET",
-  "version": "0.0.0",
+  "name": "MusicScheduler",
+  "version": "0.2.0",
+
+  "scripts": {
+    "tsc": "tsc -p . -w",
+    "start": "gulp build-dev && nodemon --ignore htm,html --ext cs,js --exec \"dnx web\" -V",
+    "postinstall": "typings install"
+  },
+
+  "dependencies": {
+    "angular2": "*",
+    "bootstrap": "^3.3.5",
+    "jquery": "^2.1.4",
+    "less": "^2.5.3",
+    "lodash": "^3.10.1",
+    "reflect-metadata": "0.1.2",
+    "systemjs": "^0.19.3"
+  },
+
   "devDependencies": {
-    "gulp": "3.8.11",
+    "gulp": "^3.9.0",
     "gulp-concat": "2.5.2",
     "gulp-cssmin": "0.1.7",
     "gulp-sass": "*",
     "gulp-uglify": "1.2.0",
-    "rimraf": "2.2.8"
+    "gulp-inline-ng2-template": "0.0.7",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-typescript": "^2.9.0",
+    "rimraf": "2.2.8",
+    "del": "*",
+    "event-stream": "*",
+    "typescript": "^1.8.10",
+    "typings": "^0.8.1"
   }
 }

@@ -1,0 +1,65 @@
+﻿<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand">MusicScheduler</a>
+            <img src="/images/grauMusicSchedulerLogo.png" alt="" class="navbar-brand" style="height: 50px"/>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li (click)="skip()">
+                    <a>Skip</a>
+                </li>
+                <li (click)="pauseResume()">
+                    <a>Pause/Resume</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="container body-content">
+    <p class="bg-info currentlyPlaying">
+        <span class="currentlyPlayingHeader">Currently playing</span><br/>{{info.CurrentlyPlaying}}
+    </p>
+
+    <h2>Book</h2>
+    <div class="input-group">
+        <span class="input-group-addon" id="input-youtube">Youtube URL</span>
+        <input #url type="text" class="col-md-8 form-control">
+    </div>
+    <div class="input-group">
+        <span class="input-group-addon">Username</span>
+        <input #username type="text" class="col-md-8 form-control">
+    </div>
+
+    <div class="input-group">
+        <button (click)="bookSong(url.value, username.value)" type="submit" class="btn btn-primary">Book</button>
+    </div>
+
+    <hr/>
+
+    <h3>Users</h3>
+    <table *ngFor='let user of info.Users' class="table userTable">
+        <tr>
+            <th>{{user.Name}}</th>
+            <td>{{user.TimePlayed}}s</td>
+            <td></td>
+        </tr>
+        <tr *ngFor='let video of user.YoutubeLinks'>
+            <th></th>
+            <td>{{video.Name}}</td>
+            <td>{{video.Duration}}s</td>
+        </tr>
+    </table>
+        
+    <hr/>
+
+    <footer>
+        <p>&copy; 2016 - MusicScheduler</p>
+    </footer>
+</div>
