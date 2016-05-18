@@ -1,4 +1,4 @@
-System.register(["angular2/core", "angular2/http", "rxjs/Rx", "rxjs/Observable"], function(exports_1, context_1) {
+System.register(["./core/classes", "angular2/core", "angular2/http", "rxjs/Rx", "rxjs/Observable"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,10 +10,13 @@ System.register(["angular2/core", "angular2/http", "rxjs/Rx", "rxjs/Observable"]
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, http_1, http_2, Observable_1;
-    var YoutubeFile, User, Info, App;
+    var classes_1, core_1, http_1, http_2, Observable_1;
+    var App;
     return {
         setters:[
+            function (classes_1_1) {
+                classes_1 = classes_1_1;
+            },
             function (core_1_1) {
                 core_1 = core_1_1;
             },
@@ -26,19 +29,13 @@ System.register(["angular2/core", "angular2/http", "rxjs/Rx", "rxjs/Observable"]
                 Observable_1 = Observable_1_1;
             }],
         execute: function() {
-            class YoutubeFile {
-            }
-            exports_1("YoutubeFile", YoutubeFile);
-            class User {
-            }
-            exports_1("User", User);
-            class Info {
-            }
-            exports_1("Info", Info);
             let App = class App {
                 constructor(_http) {
                     this._http = _http;
-                    this.info = new Info();
+                    this.info = new classes_1.Info();
+                    /**
+                     * Setup timer to poll for information
+                     */
                     this.ticks = 0;
                 }
                 ngOnInit() {

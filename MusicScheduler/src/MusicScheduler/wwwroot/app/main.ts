@@ -1,30 +1,12 @@
-﻿import {Component} from "angular2/core";
+﻿import { YoutubeFile, User, Info } from "./core/classes";
+
+import {Component} from "angular2/core";
 import {Injectable} from "angular2/core";
 import {Http, Response, Headers} from "angular2/http";
 import {HTTP_PROVIDERS} from "angular2/http";
 
 import "rxjs/Rx";
 import { Observable } from "rxjs/Observable";
-
-export class YoutubeFile {
-    name: string;
-    url: string;
-    path: string;
-    downloaded: boolean;
-    duration: number;
-}
-
-export class User {
-    name: string;
-    timePlayed: string;
-    youtubeLinks: Array<YoutubeFile>;
-}
-
-export class Info {
-    currentlyPlaying: string;
-    isPaused: boolean;
-    users: Array<User>;
-}
 
 @Component({
     selector: "MusicSchedulerApp",
@@ -37,6 +19,9 @@ export class App {
 
     constructor(private _http: Http) {}
 
+    /**
+     * Setup timer to poll for information
+     */
     ticks = 0;
     ngOnInit() {
         let timer = Observable.timer(1000, 5000);

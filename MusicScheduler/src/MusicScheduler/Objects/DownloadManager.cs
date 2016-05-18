@@ -113,6 +113,12 @@ namespace MusicScheduler.Objects
                 // -------------------
 
                 youtubeFile.Name = video.Title;
+
+                if (string.IsNullOrEmpty(youtubeFile.Name))
+                {
+                    youtubeFile.Name = video.DownloadUrl;
+                }
+
                 youtubeFile.Duration = inputFile.Metadata.Duration.TotalSeconds;
                 youtubeFile.Downloaded = true;
                 youtubeFile.Path =
