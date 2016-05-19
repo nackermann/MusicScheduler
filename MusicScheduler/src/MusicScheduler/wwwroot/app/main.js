@@ -33,6 +33,7 @@ System.register(["./core/classes", "angular2/core", "angular2/http", "rxjs/Rx", 
                 constructor(_http) {
                     this._http = _http;
                     this.info = new classes_1.Info();
+                    this.showInfoSection = false;
                     /**
                      * Setup timer to poll for information
                      */
@@ -58,10 +59,18 @@ System.register(["./core/classes", "angular2/core", "angular2/http", "rxjs/Rx", 
                  * Pauses or resumes the music
                  */
                 pauseResume() {
+                    this.showInfoSection = true;
+                    console.log("Hallo!");
                     this._http.post("api/pauseResume", "")
                         .map(this.parseResponse)
                         .catch(this.handleError)
                         .subscribe();
+                }
+                /**
+                 * Show info view or not
+                 */
+                showInfo(value) {
+                    this.showInfoSection = value;
                 }
                 /**
                  * Pauses or resumes the music
@@ -76,9 +85,10 @@ System.register(["./core/classes", "angular2/core", "angular2/http", "rxjs/Rx", 
                  * Books the specified song
                  */
                 bookSong(url, username) {
+                    url.value = "";
                     const headers = new http_1.Headers();
                     headers.append("Content-Type", "application/json");
-                    this._http.post("api/bookSong", JSON.stringify({ "URL": url, "Name": username }), { headers: headers })
+                    this._http.post("api/bookSong", JSON.stringify({ "URL": url.value, "Name": username.value }), { headers: headers })
                         .map(this.parseResponse)
                         .catch(this.handleError)
                         .subscribe();

@@ -16,6 +16,7 @@ import { Observable } from "rxjs/Observable";
 export class App {
 
     private info = new Info();
+    private showInfoSection = false;
 
     constructor(private _http: Http) {}
 
@@ -47,10 +48,19 @@ export class App {
      * Pauses or resumes the music
      */
     pauseResume() {
+        this.showInfoSection = true;
+        console.log("Hallo!");
         this._http.post("api/pauseResume", "")
             .map(this.parseResponse)
             .catch(this.handleError)
             .subscribe();
+    }
+
+    /**
+     * Show info view or not
+     */
+    showInfo(value: boolean) {
+        this.showInfoSection = value;
     }
 
     /**
@@ -66,11 +76,13 @@ export class App {
     /**
      * Books the specified song
      */
-    bookSong(url: string, username: string) {
+    bookSong(url: HTMLInputElement, username: HTMLInputElement) {
+        url.value = "";
+
         const headers = new Headers();
         headers.append("Content-Type", "application/json");
 
-        this._http.post("api/bookSong", JSON.stringify({ "URL": url, "Name": username}), { headers: headers })
+        this._http.post("api/bookSong", JSON.stringify({ "URL": url.value, "Name": username.value}), { headers: headers })
             .map(this.parseResponse)
             .catch(this.handleError)
             .subscribe();

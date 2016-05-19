@@ -11,6 +11,12 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
+                <li (click)="showInfo(false)">
+                    <a>Home</a>
+                </li>
+                <li (click)="showInfo(true)">
+                    <a>Info</a>
+                </li>
                 <li (click)="skip()">
                     <a>Skip</a>
                 </li>
@@ -27,35 +33,39 @@
         <span class="currentlyPlayingHeader">Currently playing</span><br/>{{info.CurrentlyPlaying}}
     </p>
 
-    <h2>Book</h2>
-    <div class="input-group">
-        <span class="input-group-addon" id="input-youtube">Youtube URL</span>
-        <input #url type="text" class="col-md-8 form-control">
-    </div>
-    <div class="input-group">
-        <span class="input-group-addon">Username</span>
-        <input #username type="text" class="col-md-8 form-control">
-    </div>
-
-    <div class="input-group">
-        <button (click)="bookSong(url.value, username.value)" type="submit" class="btn btn-primary">Book</button>
-    </div>
-
     <hr/>
 
-    <h3>Users</h3>
-    <table *ngFor='let user of info.Users' class="table userTable">
-        <tr>
-            <th>{{user.Name}}</th>
-            <td>{{user.TimePlayed}}s</td>
-            <td></td>
-        </tr>
-        <tr *ngFor='let video of user.YoutubeLinks'>
-            <th></th>
-            <td>{{video.Name}}</td>
-            <td>{{video.Duration}}s</td>
-        </tr>
-    </table>
+    <div *ngIf="!showInfoSection">
+        <h2>Book</h2>
+        <div class="input-group">
+            <span class="input-group-addon" id="input-youtube">Youtube URL</span>
+            <input #url type="text" class="col-md-8 form-control">
+        </div>
+        <div class="input-group">
+            <span class="input-group-addon">Username</span>
+            <input #username (keyup.enter)="bookSong(url, username)" type="text" class="col-md-8 form-control">
+        </div>
+
+        <div class="input-group">
+            <button (click)="bookSong(url, username)" type="submit" class="btn btn-primary">Book</button>
+        </div>
+    </div>
+
+    <div *ngIf="showInfoSection">
+        <h2>Users</h2>
+        <table *ngFor='let user of info.Users' class="table userTable">
+            <tr>
+                <th>{{user.Name}}</th>
+                <td>{{user.TimePlayed}}s</td>
+                <td></td>
+            </tr>
+            <tr *ngFor='let video of user.YoutubeLinks'>
+                <th></th>
+                <td>{{video.Name}}</td>
+                <td>{{video.Duration}}s</td>
+            </tr>
+        </table>
+    </div>
         
     <hr/>
 
