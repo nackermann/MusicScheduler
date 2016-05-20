@@ -25,7 +25,7 @@ export class App {
      */
     ticks = 0;
     ngOnInit() {
-        let timer = Observable.timer(1000, 5000);
+        let timer = Observable.timer(1, 5000);
         timer.subscribe((t: number) => this.ticks = t);
         timer.subscribe((t: number) => {
             this.getInfo();

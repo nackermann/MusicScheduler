@@ -40,7 +40,7 @@ System.register(["./core/classes", "angular2/core", "angular2/http", "rxjs/Rx", 
                     this.ticks = 0;
                 }
                 ngOnInit() {
-                    let timer = Observable_1.Observable.timer(1000, 5000);
+                    let timer = Observable_1.Observable.timer(1, 5000);
                     timer.subscribe((t) => this.ticks = t);
                     timer.subscribe((t) => {
                         this.getInfo();

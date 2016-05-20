@@ -52,7 +52,8 @@
     </div>
 
     <div *ngIf="showInfoSection">
-        <h2>Users</h2>
+        <h2>Queue</h2>
+        <p *ngIf="info.Users.length <= 0">Nothing has been queued yet.</p>
         <table *ngFor='let user of info.Users' class="table userTable">
             <tr>
                 <th>{{user.Name}}</th>
