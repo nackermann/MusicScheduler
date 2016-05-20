@@ -56,12 +56,13 @@
         <table *ngFor='let user of info.Users' class="table userTable">
             <tr>
                 <th>{{user.Name}}</th>
-                <td>{{user.TimePlayed}}s</td>
+                <td>{{user.TimePlayed}}s played</td>
                 <td></td>
             </tr>
             <tr *ngFor='let video of user.YoutubeLinks'>
                 <th></th>
-                <td>{{video.Name}}</td>
+                <td *ngIf="video.Name">{{video.Name}}</td>
+                <td *ngIf="!video.Name">{{video.Url}}</td>
                 <td>{{video.Duration}}s</td>
             </tr>
         </table>

@@ -85,10 +85,11 @@ System.register(["./core/classes", "angular2/core", "angular2/http", "rxjs/Rx", 
                  * Books the specified song
                  */
                 bookSong(url, username) {
+                    var urlToSend = url.value;
                     url.value = "";
                     const headers = new http_1.Headers();
                     headers.append("Content-Type", "application/json");
-                    this._http.post("api/bookSong", JSON.stringify({ "URL": url.value, "Name": username.value }), { headers: headers })
+                    this._http.post("api/bookSong", JSON.stringify({ "URL": urlToSend, "Name": username.value }), { headers: headers })
                         .map(this.parseResponse)
                         .catch(this.handleError)
                         .subscribe();

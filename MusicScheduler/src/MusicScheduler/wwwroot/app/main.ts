@@ -77,12 +77,13 @@ export class App {
      * Books the specified song
      */
     bookSong(url: HTMLInputElement, username: HTMLInputElement) {
-        url.value = "";
 
+        var urlToSend = url.value;
+        url.value = "";
         const headers = new Headers();
         headers.append("Content-Type", "application/json");
 
-        this._http.post("api/bookSong", JSON.stringify({ "URL": url.value, "Name": username.value}), { headers: headers })
+        this._http.post("api/bookSong", JSON.stringify({ "URL": urlToSend, "Name": username.value}), { headers: headers })
             .map(this.parseResponse)
             .catch(this.handleError)
             .subscribe();
