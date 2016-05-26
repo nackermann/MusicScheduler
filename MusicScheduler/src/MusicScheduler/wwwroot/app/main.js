@@ -60,7 +60,7 @@ System.register(["./core/classes", "angular2/core", "angular2/http", "rxjs/Rx", 
                  */
                 pauseResume() {
                     this.showInfoSection = true;
-                    console.log("Hallo!");
+                    this.info.IsPaused = !this.info.IsPaused;
                     this._http.post("api/pauseResume", "")
                         .map(this.parseResponse)
                         .catch(this.handleError)

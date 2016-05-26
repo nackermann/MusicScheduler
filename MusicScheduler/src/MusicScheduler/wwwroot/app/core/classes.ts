@@ -13,7 +13,7 @@ export class User {
 }
 
 export class Info {
-    currentlyPlaying: string;
-    isPaused: boolean;
-    users: Array<User>;
+    CurrentlyPlaying: string;
+    IsPaused: boolean;
+    Users: Array<User>;
 }

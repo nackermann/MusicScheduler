@@ -39,7 +39,7 @@ namespace MusicScheduler.Controllers
             {
                 CurrentlyPlaying = ServiceLocator.Musicplayer.CurrentPlayingSong != null
                     ? ServiceLocator.Musicplayer.CurrentPlayingSong.Name
-                    : "",
+                    : "--",
                 IsPaused = ServiceLocator.Musicplayer.IsPaused,
                 Users = new List<User>()
             };

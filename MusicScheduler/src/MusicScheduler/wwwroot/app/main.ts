@@ -48,8 +48,7 @@ export class App {
      * Pauses or resumes the music
      */
     pauseResume() {
-        this.showInfoSection = true;
-        console.log("Hallo!");
+        this.info.IsPaused = !this.info.IsPaused;
         this._http.post("api/pauseResume", "")
             .map(this.parseResponse)
             .catch(this.handleError)

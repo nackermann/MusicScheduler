@@ -17,21 +17,27 @@
                 <li (click)="showInfo(true)">
                     <a>Info</a>
                 </li>
-                <li (click)="skip()">
-                    <a>Skip</a>
-                </li>
-                <li (click)="pauseResume()">
-                    <a>Pause/Resume</a>
-                </li>
             </ul>
         </div>
     </div>
 </div>
 
 <div class="container body-content">
-    <p class="bg-info currentlyPlaying">
-        <span class="currentlyPlayingHeader">Currently playing</span><br/>{{info.CurrentlyPlaying}}
-    </p>
+    <div class="bg-info currentlyPlaying">
+        <p *ngIf="!info.IsPaused" class="currentlyPlayingHeader">Currently playing</p>
+        <p>{{info.CurrentlyPlaying}}</p>
+
+        <button *ngIf="info.IsPaused" (click)="pauseResume()" type="button" class="btn btn-default" aria-label="Left Align">
+            <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
+        </button>
+        <button *ngIf="!info.IsPaused" (click)="pauseResume()" type="button" class="btn btn-default" aria-label="Left Align">
+            <span class="glyphicon glyphicon-pause" aria-hidden="true"></span>
+        </button>
+
+        <button type="button" class="btn btn-default" aria-label="Left Align">
+            <span class="glyphicon glyphicon-fast-forward" aria-hidden="true"></span>
+        </button>
+    </div>
 
     <hr/>
 
