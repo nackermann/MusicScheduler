@@ -74,29 +74,6 @@ namespace MusicScheduler.Objects
 
                 var fileName = NormalizeFileName(video.Title);
 
-                var videoDownloader = new VideoDownloader(video,
-                    Path.Combine(ServiceLocator.MusicSchedulerDownloadDirectory,
-                        fileName + video.AudioExtension));
-
-                try
-                {
-                    videoDownloader.Execute();
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.ToString());
-                    user.YoutubeLinks.Remove(youtubeFile);
-                    return;
-                }
-
-                // Convert to mp4 to mp3
-                // -------------------
-                var inputFile = new MediaFile
-                {
-                    Filename =
-                        Path.Combine(ServiceLocator.MusicSchedulerDownloadDirectory,
-                            fileName + video.AudioExtension)
-                };
                 var outputFile = new MediaFile
                 {
                     Filename =
@@ -104,12 +81,43 @@ namespace MusicScheduler.Objects
                             fileName + ".mp3")
                 };
 
+                if (!File.Exists(Path.Combine(ServiceLocator.MusicSchedulerDownloadDirectory, fileName + ".mp3")))
+                {
+                    var videoDownloader = new VideoDownloader(video, Path.Combine(ServiceLocator.MusicSchedulerDownloadDirectory, fileName + video.AudioExtension));
+
+                    try
+                    {
+                        videoDownloader.Execute();
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e.ToString());
+                        user.YoutubeLinks.Remove(youtubeFile);
+                        return;
+                    }
+
+                    // Convert to mp4 to mp3
+                    // -------------------
+                    var inputFile = new MediaFile
+                    {
+                        Filename =
+                            Path.Combine(ServiceLocator.MusicSchedulerDownloadDirectory,
+                                fileName + video.AudioExtension)
+                    };
+
+                    using (var engine = new Engine())
+                    {
+                        engine.Convert(inputFile, outputFile);
+                    }
+                    // -------------------
+
+                    File.Delete(Path.Combine(ServiceLocator.MusicSchedulerDownloadDirectory, fileName + video.AudioExtension));
+                }
+
                 using (var engine = new Engine())
                 {
-                    engine.GetMetadata(inputFile);
-                    engine.Convert(inputFile, outputFile);
+                    engine.GetMetadata(outputFile);
                 }
-                // -------------------
 
                 youtubeFile.Name = video.Title;
 
@@ -118,14 +126,11 @@ namespace MusicScheduler.Objects
                     youtubeFile.Name = video.DownloadUrl;
                 }
 
-                youtubeFile.Duration = inputFile.Metadata.Duration.TotalSeconds;
+                youtubeFile.Duration = outputFile.Metadata.Duration.TotalSeconds;
                 youtubeFile.Downloaded = true;
                 youtubeFile.Path =
                     Path.Combine(ServiceLocator.MusicSchedulerDownloadDirectory,
                         fileName + ".mp3");
-
-                File.Delete(Path.Combine(ServiceLocator.MusicSchedulerDownloadDirectory,
-                    fileName + video.AudioExtension));
 
                 this.OnYoutubeFileDownloadFinish();
             });
