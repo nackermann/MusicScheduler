@@ -69,14 +69,13 @@ namespace MusicScheduler.Objects
                     DownloadUrlResolver.DecryptDownloadUrl(video);
                 }
 
-                if (!Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "/Downloaded"))
-                    Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) +
-                                              "/Downloaded");
+                if (!Directory.Exists(ServiceLocator.MusicSchedulerDownloadDirectory))
+                    Directory.CreateDirectory(ServiceLocator.MusicSchedulerDownloadDirectory);
 
                 var fileName = NormalizeFileName(video.Title);
 
                 var videoDownloader = new VideoDownloader(video,
-                    Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "/Downloaded",
+                    Path.Combine(ServiceLocator.MusicSchedulerDownloadDirectory,
                         fileName + video.AudioExtension));
 
                 try
@@ -95,13 +94,13 @@ namespace MusicScheduler.Objects
                 var inputFile = new MediaFile
                 {
                     Filename =
-                        Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "/Downloaded",
+                        Path.Combine(ServiceLocator.MusicSchedulerDownloadDirectory,
                             fileName + video.AudioExtension)
                 };
                 var outputFile = new MediaFile
                 {
                     Filename =
-                        Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "/Downloaded",
+                        Path.Combine(ServiceLocator.MusicSchedulerDownloadDirectory,
                             fileName + ".mp3")
                 };
 
@@ -122,10 +121,10 @@ namespace MusicScheduler.Objects
                 youtubeFile.Duration = inputFile.Metadata.Duration.TotalSeconds;
                 youtubeFile.Downloaded = true;
                 youtubeFile.Path =
-                    Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "/Downloaded",
+                    Path.Combine(ServiceLocator.MusicSchedulerDownloadDirectory,
                         fileName + ".mp3");
 
-                File.Delete(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "/Downloaded",
+                File.Delete(Path.Combine(ServiceLocator.MusicSchedulerDownloadDirectory,
                     fileName + video.AudioExtension));
 
                 this.OnYoutubeFileDownloadFinish();

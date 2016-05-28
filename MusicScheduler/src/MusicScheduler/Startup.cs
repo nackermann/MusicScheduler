@@ -15,8 +15,7 @@ namespace MusicScheduler
         {
             try
             {
-                Directory.Delete(
-                    Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "/Downloaded"), true);
+                Directory.Delete(ServiceLocator.MusicSchedulerDownloadDirectory, true);
             }
             catch (Exception)
             {
