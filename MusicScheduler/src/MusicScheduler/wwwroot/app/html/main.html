@@ -24,6 +24,7 @@
 
 <div class="container body-content">
     <div class="bg-info currentlyPlaying">
+        <p *ngIf="info.IsPaused" class="currentlyPlayingHeader">Paused</p>
         <p *ngIf="!info.IsPaused" class="currentlyPlayingHeader">Currently playing</p>
         <p>{{info.CurrentlyPlaying}}</p>
 
@@ -34,7 +35,7 @@
             <span class="glyphicon glyphicon-pause" aria-hidden="true"></span>
         </button>
 
-        <button type="button" class="btn btn-default" aria-label="Left Align">
+        <button (click)="skip()" type="button" class="btn btn-default" aria-label="Left Align">
             <span class="glyphicon glyphicon-fast-forward" aria-hidden="true"></span>
         </button>
     </div>
@@ -45,7 +46,7 @@
         <h2>Book</h2>
         <div class="input-group">
             <span class="input-group-addon" id="input-youtube">Youtube URL</span>
-            <input #url type="text" class="col-md-8 form-control">
+            <input #url (keyup.enter)="bookSong(url, username)" type="text" class="col-md-8 form-control">
         </div>
         <div class="input-group">
             <span class="input-group-addon">Username</span>
