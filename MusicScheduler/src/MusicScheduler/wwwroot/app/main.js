@@ -59,7 +59,6 @@ System.register(["./core/classes", "angular2/core", "angular2/http", "rxjs/Rx", 
                  * Pauses or resumes the music
                  */
                 pauseResume() {
-                    this.showInfoSection = true;
                     this.info.IsPaused = !this.info.IsPaused;
                     this._http.post("api/pauseResume", "")
                         .map(this.parseResponse)
@@ -85,8 +84,13 @@ System.register(["./core/classes", "angular2/core", "angular2/http", "rxjs/Rx", 
                  * Books the specified song
                  */
                 bookSong(url, username) {
+                    if (username.value === "") {
+                        username.focus();
+                        return;
+                    }
                     var urlToSend = url.value;
                     url.value = "";
+                    url.focus();
                     const headers = new http_1.Headers();
                     headers.append("Content-Type", "application/json");
                     this._http.post("api/bookSong", JSON.stringify({ "URL": urlToSend, "Name": username.value }), { headers: headers })
