@@ -126,7 +126,7 @@ namespace MusicScheduler.Objects
                     youtubeFile.Name = video.DownloadUrl;
                 }
 
-                youtubeFile.Duration = outputFile.Metadata.Duration.TotalSeconds;
+                youtubeFile.Duration = Math.Round(outputFile.Metadata.Duration.TotalSeconds, MidpointRounding.ToEven);
                 youtubeFile.Downloaded = true;
                 youtubeFile.Path =
                     Path.Combine(ServiceLocator.MusicSchedulerDownloadDirectory,
