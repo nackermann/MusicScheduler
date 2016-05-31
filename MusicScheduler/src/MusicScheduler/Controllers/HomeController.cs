@@ -21,15 +21,17 @@ namespace MusicScheduler.Controllers
         }
 
         [HttpPost("api/skip")]
-        public void Skip()
+        public ActionResult Skip()
         {
             ServiceLocator.Musicplayer.SkipCurrentSong();
+            return this.Success();
         }
 
         [HttpPost("api/pauseResume")]
-        public void PauseResume()
+        public ActionResult PauseResume()
         {
             ServiceLocator.Musicplayer.PauseResumeCurrentSong();
+            return this.Success();
         }
 
         [HttpGet("api/info")]
@@ -62,7 +64,7 @@ namespace MusicScheduler.Controllers
 
             if (string.IsNullOrWhiteSpace(model.URL) || string.IsNullOrWhiteSpace(userName) || !isYoutubeUrl)
             {
-                return Json("error");
+                return this.Error("Invalid URL or username");
             }
 
             var user = this.userManager.Users.FirstOrDefault(x => x.Name == userName);
@@ -76,12 +78,22 @@ namespace MusicScheduler.Controllers
                 this.userManager.Users.Add(new User(userName, new YoutubeFile {Url = model.URL}));
             }
 
-            return Json("success");
+            return this.Success();
         }
 
         public IActionResult Error()
         {
             return View("~/Views/Shared/Error.cshtml");
+        }
+
+        public ActionResult Success()
+        {
+            return Json("{ success: true }");
+        }
+
+        public ActionResult Error(string message)
+        {
+            return Json("{ success: false, message: '" + message + "'");
         }
     }
 }
