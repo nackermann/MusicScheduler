@@ -29,11 +29,18 @@ namespace MusicScheduler.Objects
                 }
             };
 
-            this.soundDevice.Stopped += HandleWaveOutEventPlaybackStopped;
+            this.soundDevice.Stopped += this.HandleWaveOutEventPlaybackStopped;
         }
 
         public bool IsPaused { get; set; }
         public YoutubeFile CurrentPlayingSong { get; set; }
+
+
+        public float SoundVolume
+        {
+            get { return this.soundDevice.Volume; }
+            set { this.soundDevice.Volume = value; }
+        }
 
         private void HandleWaveOutEventPlaybackStopped(object sender, PlaybackStoppedEventArgs e)
         {
