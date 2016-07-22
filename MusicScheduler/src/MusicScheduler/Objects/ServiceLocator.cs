@@ -5,6 +5,7 @@ namespace MusicScheduler.Objects
     public class ServiceLocator
     {
         public static UserManager Usermanager { get; private set; }
+        public static HistoryProvider HistoryProvider { get; private set; }
         public static DownloadManager Downloadmanager { get; private set; }
         public static MusicPlayer Musicplayer { get; private set; }
         public static string MusicSchedulerDirectory => Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "/MusicSchedulerData";
@@ -15,6 +16,7 @@ namespace MusicScheduler.Objects
             Usermanager = new UserManager();
             Downloadmanager = new DownloadManager();
             Musicplayer = new MusicPlayer();
+            HistoryProvider = new HistoryProvider();
         }
     }
 }
