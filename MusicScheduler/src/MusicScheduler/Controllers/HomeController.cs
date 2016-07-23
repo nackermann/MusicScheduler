@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using Microsoft.AspNet.Mvc;
 using MusicScheduler.Objects;
@@ -27,6 +29,22 @@ namespace MusicScheduler.Controllers
             return this.Success();
         }
 
+        [HttpPost("api/volumeUp")]
+        public ActionResult VolumeUp()
+        {
+            ServiceLocator.Musicplayer.SoundVolume += 0.05f;
+
+            return this.Success();
+        }
+
+        [HttpPost("api/volumeDown")]
+        public ActionResult VolumeDown()
+        {
+            ServiceLocator.Musicplayer.SoundVolume -= 0.05f;
+
+            return this.Success();
+        }
+
         [HttpPost("api/pauseResume")]
         public ActionResult PauseResume()
         {
@@ -43,7 +61,8 @@ namespace MusicScheduler.Controllers
                     ? ServiceLocator.Musicplayer.CurrentPlayingSong.Name
                     : "--",
                 IsPaused = ServiceLocator.Musicplayer.IsPaused,
-                Users = new List<User>()
+                Users = new List<User>(),
+                Volume = Math.Round(ServiceLocator.Musicplayer.SoundVolume * 100).ToString(CultureInfo.InvariantCulture)
             };
 
             foreach (var user in this.userManager.Users)

@@ -14,6 +14,7 @@ export class User {
 
 export class Info {
     CurrentlyPlaying: string;
+    Volume: string;
     IsPaused: boolean;
     Users: Array<User>;
 }

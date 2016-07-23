@@ -73,6 +73,26 @@ export class App {
     }
 
     /**
+     * Turns up the volume by 0.05
+     */
+    volumeUp() {
+        this._http.post("api/volumeUp", "")
+            .map(this.parseResponse)
+            .catch(this.handleError)
+            .subscribe();
+    }
+
+    /**
+     * Turns down the volume by 0.05
+     */
+    volumeDown() {
+        this._http.post("api/volumeDown", "")
+            .map(this.parseResponse)
+            .catch(this.handleError)
+            .subscribe();
+    }
+
+    /**
      * Books the specified song
      */
     bookSong(url: HTMLInputElement, username: HTMLInputElement) {

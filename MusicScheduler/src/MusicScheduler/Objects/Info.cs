@@ -10,5 +10,6 @@ namespace MusicScheduler.Objects
         public string CurrentlyPlaying;
         public bool IsPaused;
         public List<User> Users;
+        public string Volume;
     }
 }

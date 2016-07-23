@@ -25,7 +25,7 @@
 <div class="container body-content">
     <div class="bg-info currentlyPlaying">
         <p *ngIf="info.IsPaused" class="currentlyPlayingHeader">Paused</p>
-        <p *ngIf="!info.IsPaused" class="currentlyPlayingHeader">Currently playing</p>
+        <p *ngIf="!info.IsPaused" class="currentlyPlayingHeader">Currently playing at {{info.Volume}}% volume</p>
         <p>{{info.CurrentlyPlaying}}</p>
 
         <button *ngIf="info.IsPaused" (click)="pauseResume()" type="button" class="btn btn-default" aria-label="Left Align">
@@ -37,6 +37,14 @@
 
         <button (click)="skip()" type="button" class="btn btn-default" aria-label="Left Align">
             <span class="glyphicon glyphicon-fast-forward" aria-hidden="true"></span>
+        </button>
+
+        <button (click)="volumeUp()" type="button" class="btn btn-default" aria-label="Left Align">
+            <span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
+        </button>
+
+        <button (click)="volumeDown()" type="button" class="btn btn-default" aria-label="Left Align">
+            <span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span>
         </button>
     </div>
 
