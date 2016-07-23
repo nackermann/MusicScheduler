@@ -87,6 +87,10 @@ namespace MusicScheduler.Objects
 
                     try
                     {
+                        videoDownloader.DownloadProgressChanged += (sender, args) =>
+                        {
+                            youtubeFile.DownloadStatus = (double)(int)(args.ProgressPercentage * 100) / 100;
+                        };
                         videoDownloader.Execute();
                     }
                     catch (Exception e)
@@ -96,7 +100,7 @@ namespace MusicScheduler.Objects
                         return;
                     }
 
-                    // Convert to mp4 to mp3
+                    // Convert mp4 to mp3
                     // -------------------
                     var inputFile = new MediaFile
                     {

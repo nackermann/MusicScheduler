@@ -80,6 +80,7 @@
                 <td *ngIf="video.Name">{{video.Name}}</td>
                 <td *ngIf="!video.Name">{{video.Url}}</td>
                 <td>{{video.Duration}}s</td>
+                <td>Download status: {{video.DownloadStatus}}%</td>
             </tr>
         </table>
     </div>

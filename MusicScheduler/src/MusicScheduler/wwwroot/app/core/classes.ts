@@ -4,6 +4,7 @@
     path: string;
     downloaded: boolean;
     duration: number;
+    downloadStatus: string;
 }
 
 export class User {

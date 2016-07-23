@@ -11,5 +11,7 @@
         public bool Downloaded { get; set; }
 
         public double Duration { get; set; }
+
+        public double DownloadStatus { get; set; }
     }
 }
