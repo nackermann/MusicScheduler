@@ -36,10 +36,27 @@ namespace MusicScheduler.Objects
         public YoutubeFile CurrentPlayingSong { get; set; }
 
 
+        private float soundVolume = 0.3f;
         public float SoundVolume
         {
-            get { return this.soundDevice.Volume; }
-            set { this.soundDevice.Volume = value; }
+            get { return this.soundVolume; }
+            set
+            {
+                if (value >= 1f)
+                {
+                    value = 1f;
+                }
+                else if (value <= 0f)
+                {
+                    value = 0f;
+                }
+
+                this.soundVolume = value;
+                if (this.soundDevice.WaveSource != null)
+                {
+                    this.soundDevice.Volume = value;
+                }
+            }
         }
 
         private void HandleWaveOutEventPlaybackStopped(object sender, PlaybackStoppedEventArgs e)
@@ -85,6 +102,7 @@ namespace MusicScheduler.Objects
                 {
                     //this.soundDevice.Stop(); // not sure about this
                     this.soundDevice.Initialize(CodecFactory.Instance.GetCodec(youtubeFile.Path));
+                    this.soundDevice.Volume = this.soundVolume;
                     this.soundDevice.Play();
                 });
 
