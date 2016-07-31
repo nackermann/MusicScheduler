@@ -25,8 +25,8 @@
 <div class="container body-content">
     <div class="bg-info currentlyPlaying">
         <p *ngIf="info.IsPaused" class="currentlyPlayingHeader">Paused</p>
-        <p *ngIf="!info.IsPaused" class="currentlyPlayingHeader">Currently playing at {{info.Volume}}% volume</p>
-        <p>{{info.CurrentlyPlaying}}</p>
+        <p *ngIf="!info.IsPaused" class="currentlyPlayingHeader">{{info.CurrentlyPlayingAuthor}} is currently playing at {{info.Volume}}% volume</p>
+        <p>{{info.CurrentlyPlayingSong}}</p>
 
         <button *ngIf="info.IsPaused" (click)="pauseResume()" type="button" class="btn btn-default" aria-label="Left Align">
             <span class="glyphicon glyphicon-play" aria-hidden="true"></span>

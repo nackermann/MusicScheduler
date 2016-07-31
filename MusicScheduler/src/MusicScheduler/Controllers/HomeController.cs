@@ -57,12 +57,13 @@ namespace MusicScheduler.Controllers
         {
             var info = new Info
             {
-                CurrentlyPlaying = ServiceLocator.Musicplayer.CurrentPlayingSong != null
+                CurrentlyPlayingSong = ServiceLocator.Musicplayer.CurrentPlayingSong != null
                     ? ServiceLocator.Musicplayer.CurrentPlayingSong.Name
                     : "--",
                 IsPaused = ServiceLocator.Musicplayer.IsPaused,
                 Users = new List<User>(),
-                Volume = Math.Round(ServiceLocator.Musicplayer.SoundVolume * 100).ToString(CultureInfo.InvariantCulture)
+                Volume = Math.Round(ServiceLocator.Musicplayer.SoundVolume * 100).ToString(CultureInfo.InvariantCulture),
+                CurrentlyPlayingAuthor = ServiceLocator.Musicplayer.CurrentPlayingSong != null ? ServiceLocator.Musicplayer.CurrentPlayingSong.Author : "Nobody"
             };
 
             foreach (var user in this.userManager.Users)

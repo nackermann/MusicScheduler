@@ -7,9 +7,10 @@ namespace MusicScheduler.Objects
 {
     public class Info
     {
-        public string CurrentlyPlaying;
+        public string CurrentlyPlayingSong;
         public bool IsPaused;
         public List<User> Users;
         public string Volume;
+        public string CurrentlyPlayingAuthor;
     }
 }

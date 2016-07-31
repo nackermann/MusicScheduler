@@ -135,6 +135,7 @@ namespace MusicScheduler.Objects
                 youtubeFile.Path =
                     Path.Combine(ServiceLocator.MusicSchedulerDownloadDirectory,
                         fileName + ".mp3");
+                youtubeFile.Author = user.Name;
 
                 this.OnYoutubeFileDownloadFinish();
             });

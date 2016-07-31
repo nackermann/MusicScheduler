@@ -14,8 +14,9 @@ export class User {
 }
 
 export class Info {
-    CurrentlyPlaying: string;
+    CurrentlyPlayingSong: string;
     Volume: string;
     IsPaused: boolean;
     Users: Array<User>;
+    CurrentlyPlayingAuthor: string;
 }
