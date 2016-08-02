@@ -95,6 +95,7 @@ namespace MusicScheduler.Objects
                     }
                     catch (Exception e)
                     {
+                        // if one/two person(s) download the same song this will happen -> removing the link should be fine I guess
                         Console.WriteLine(e.ToString());
                         user.YoutubeLinks.Remove(youtubeFile);
                         return;
@@ -120,7 +121,17 @@ namespace MusicScheduler.Objects
 
                 using (var engine = new Engine())
                 {
-                    engine.GetMetadata(outputFile);
+                    try
+                    {
+                        engine.GetMetadata(outputFile);
+                    }
+                    catch (Exception e)
+                    {
+                        // ffmpeg fails here in a very rare case
+                        Console.WriteLine(e.ToString());
+                        user.YoutubeLinks.Remove(youtubeFile);
+                        return;
+                    }
                 }
 
                 youtubeFile.Name = video.Title;
