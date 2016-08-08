@@ -2075,7 +2075,7 @@
           "lib/net45/_._": {}
         }
       },
-      "YoutubeExtractor/0.10.10": {
+      "YoutubeExtractor/0.10.11": {
         "type": "package",
         "dependencies": {
           "Newtonsoft.Json": "6.0.6"
@@ -4164,7 +4164,7 @@
           "lib/net45/_._": {}
         }
       },
-      "YoutubeExtractor/0.10.10": {
+      "YoutubeExtractor/0.10.11": {
         "type": "package",
         "dependencies": {
           "Newtonsoft.Json": "6.0.6"
@@ -6253,7 +6253,7 @@
           "lib/net45/_._": {}
         }
       },
-      "YoutubeExtractor/0.10.10": {
+      "YoutubeExtractor/0.10.11": {
         "type": "package",
         "dependencies": {
           "Newtonsoft.Json": "6.0.6"
@@ -8532,16 +8532,16 @@
         "System.Threading.nuspec"
       ]
     },
-    "YoutubeExtractor/0.10.10": {
+    "YoutubeExtractor/0.10.11": {
       "type": "package",
-      "sha512": "iH2xYX2Piz0ToaZvXTS4QPY3UWlloVTGuzObn7dlsflqkypb++8qvYDETc2aScqYe7NSO9oPyGtXWHB0u3r6JQ==",
+      "sha512": "l670U1sF8DsSTpuPHTbJ6ZDNUySAvnbcvYGtne5PiNR/r1xXfxhptlgbih9WzWfJPc6pdjuCmpKl5NlFE0tMXw==",
       "files": [
         "lib/net35/YoutubeExtractor.dll",
         "lib/net35/YoutubeExtractor.xml",
         "lib/portable-net45+win8+wpa81+wp8/YoutubeExtractor.dll",
         "lib/portable-net45+win8+wpa81+wp8/YoutubeExtractor.xml",
-        "YoutubeExtractor.0.10.10.nupkg",
-        "YoutubeExtractor.0.10.10.nupkg.sha512",
+        "YoutubeExtractor.0.10.11.nupkg",
+        "YoutubeExtractor.0.10.11.nupkg.sha512",
         "YoutubeExtractor.nuspec"
       ]
     }
@@ -8571,7 +8571,7 @@
       "Microsoft.VisualStudio.Web.BrowserLink.Loader >= 14.0.0-rc1-final"
     ],
     "DNX,Version=v4.5.1": [
-      "YoutubeExtractor >= 0.10.10"
+      "YoutubeExtractor >= 0.10.11"
     ]
   }
 }

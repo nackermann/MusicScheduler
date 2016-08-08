@@ -37,7 +37,7 @@
   "frameworks": {
     "dnx451": {
       "dependencies": {
-        "YoutubeExtractor": "0.10.10"
+        "YoutubeExtractor": "0.10.11"
       }
     }
   },
