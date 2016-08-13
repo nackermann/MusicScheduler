@@ -13,13 +13,46 @@ namespace MusicScheduler
     {
         public Startup(IHostingEnvironment env)
         {
-            try
+            if (!File.Exists(ServiceLocator.MusicSchedulerConfigFile))
             {
-                Directory.Delete(ServiceLocator.MusicSchedulerDownloadDirectory, true);
+                File.WriteAllLines(ServiceLocator.MusicSchedulerConfigFile,
+                    new[] {"KeepMusicFiles=true", "MusicFilesDownloadLocation=default"});
+
             }
-            catch (Exception)
+
+            bool keepMusicFiles = false;
+            foreach (string readLine in File.ReadLines(ServiceLocator.MusicSchedulerConfigFile))
             {
-                // Directory hasn't been found since this is our first start. In that case, the exception does not matter.
+                string[] splitResult = readLine.Split(new[] { "=" }, StringSplitOptions.None);
+
+                var key = splitResult[0];
+
+                switch (key)
+                {
+                    case "KeepMusicFiles":
+                        keepMusicFiles = Convert.ToBoolean(splitResult[1]);
+                        break;
+                    case "MusicFilesDownloadLocation":
+                        string newMusicFilesLocation = splitResult[1];
+
+                        if (!string.IsNullOrWhiteSpace(newMusicFilesLocation) && newMusicFilesLocation != "default")
+                        {
+                            ServiceLocator.MusicSchedulerDownloadDirectory = splitResult[1];
+                        }
+                        break;
+                }
+            }
+
+            if (!keepMusicFiles)
+            {
+                try
+                {
+                    Directory.Delete(ServiceLocator.MusicSchedulerDownloadDirectory, true);
+                }
+                catch (Exception)
+                {
+                    // Directory hasn't been found since this is our first start. In that case, the exception does not matter.
+                }
             }
 
             ServiceLocator.Initalize();
