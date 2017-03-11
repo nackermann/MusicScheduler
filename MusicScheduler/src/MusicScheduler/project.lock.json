@@ -2075,17 +2075,9 @@
           "lib/net45/_._": {}
         }
       },
-      "YoutubeExtractor/0.10.11": {
-        "type": "package",
-        "dependencies": {
-          "Newtonsoft.Json": "6.0.6"
-        },
-        "compile": {
-          "lib/net35/YoutubeExtractor.dll": {}
-        },
-        "runtime": {
-          "lib/net35/YoutubeExtractor.dll": {}
-        }
+      "YoutubeExtractor/1.0.0": {
+        "type": "project",
+        "framework": "DNX,Version=v4.5.1"
       }
     },
     "DNX,Version=v4.5.1/win7-x86": {
@@ -4164,17 +4156,9 @@
           "lib/net45/_._": {}
         }
       },
-      "YoutubeExtractor/0.10.11": {
-        "type": "package",
-        "dependencies": {
-          "Newtonsoft.Json": "6.0.6"
-        },
-        "compile": {
-          "lib/net35/YoutubeExtractor.dll": {}
-        },
-        "runtime": {
-          "lib/net35/YoutubeExtractor.dll": {}
-        }
+      "YoutubeExtractor/1.0.0": {
+        "type": "project",
+        "framework": "DNX,Version=v4.5.1"
       }
     },
     "DNX,Version=v4.5.1/win7-x64": {
@@ -6253,21 +6237,17 @@
           "lib/net45/_._": {}
         }
       },
-      "YoutubeExtractor/0.10.11": {
-        "type": "package",
-        "dependencies": {
-          "Newtonsoft.Json": "6.0.6"
-        },
-        "compile": {
-          "lib/net35/YoutubeExtractor.dll": {}
-        },
-        "runtime": {
-          "lib/net35/YoutubeExtractor.dll": {}
-        }
+      "YoutubeExtractor/1.0.0": {
+        "type": "project",
+        "framework": "DNX,Version=v4.5.1"
       }
     }
   },
   "libraries": {
+    "YoutubeExtractor/1.0.0": {
+      "type": "project",
+      "path": "../../wrap/YoutubeExtractor/project.json"
+    },
     "CSCore/1.1.0-beta2": {
       "type": "package",
       "sha512": "dSoQdK+Rv+WqZ4ChY14Z+yNroPad/Masu6q5idvyYOpEL6GTohF0jmky0fW/+TdrelAXZ0iBG3d4P0ZlAf5c6Q==",
@@ -8531,19 +8511,6 @@
         "System.Threading.4.0.0.nupkg.sha512",
         "System.Threading.nuspec"
       ]
-    },
-    "YoutubeExtractor/0.10.11": {
-      "type": "package",
-      "sha512": "l670U1sF8DsSTpuPHTbJ6ZDNUySAvnbcvYGtne5PiNR/r1xXfxhptlgbih9WzWfJPc6pdjuCmpKl5NlFE0tMXw==",
-      "files": [
-        "lib/net35/YoutubeExtractor.dll",
-        "lib/net35/YoutubeExtractor.xml",
-        "lib/portable-net45+win8+wpa81+wp8/YoutubeExtractor.dll",
-        "lib/portable-net45+win8+wpa81+wp8/YoutubeExtractor.xml",
-        "YoutubeExtractor.0.10.11.nupkg",
-        "YoutubeExtractor.0.10.11.nupkg.sha512",
-        "YoutubeExtractor.nuspec"
-      ]
     }
   },
   "projectFileDependencyGroups": {
@@ -8571,7 +8538,7 @@
       "Microsoft.VisualStudio.Web.BrowserLink.Loader >= 14.0.0-rc1-final"
     ],
     "DNX,Version=v4.5.1": [
-      "YoutubeExtractor >= 0.10.11"
+      "YoutubeExtractor >= 1.0.0-*"
     ]
   }
 }
